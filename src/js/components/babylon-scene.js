@@ -6,6 +6,7 @@ export class BabylonScene {
         scene: Type.object,
         engine: Type.object,
         canvas: Type.object,
+        showInspector: Type.boolean
     }
     /**
      * @type {Scene}
@@ -19,4 +20,8 @@ export class BabylonScene {
      * @type {HTMLCanvasElement}
      */
     canvas = undefined
+    /**
+     * @type {boolean}
+     */
+    showInspector = false
 }

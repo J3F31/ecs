@@ -1,8 +1,10 @@
 import { System } from '@lastolivegames/becsy'
 import { Scene, Engine, Color3 } from '@babylonjs/core'
 import { BabylonScene } from '../components/babylon-scene';
+import "@babylonjs/core/Debug/debugLayer";
+import "@babylonjs/inspector";
 
-export class CreateScene extends System {
+export class SystemCreateScene extends System {
     #entities = this.query(q => q.added.removed.with(BabylonScene).write)
 
     execute() {
@@ -18,9 +20,17 @@ export class CreateScene extends System {
             const engine = new Engine(canvas);
             entityWrite.engine = Engine;
             const scene = new Scene(engine);
-            scene.ambientColor = new Color3(0.3, 0.3, 0.3);
-            console.log(scene)
             entityWrite.scene = scene;
+
+            engine.runRenderLoop(function () {
+                scene.render();
+            });
+            
+            window.addEventListener("resize", function () {
+                engine.resize();
+            });
+
+            if (entityWrite.showInspector) scene.debugLayer.show({embedMode: true});
         }
     }
 }

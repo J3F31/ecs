@@ -1,13 +1,11 @@
 import { Type } from "@lastolivegames/becsy";
-import { AbstractMesh, MeshBuilder, Scene } from '@babylonjs/core'
-import { BabylonScene } from "./babylon-scene";
+import { AbstractMesh } from '@babylonjs/core'
+import { optionsBabylonMesh } from "./options-babylon-mesh";
 
 export class BabylonMesh {
     static schema = {
         mesh: Type.object,
-        name: Type.dynamicString(999),
-        method: Type.staticString(Object.keys(MeshBuilder)),
-        scene: Type.object
+        method: Type.staticString(Object.keys(optionsBabylonMesh))
     }
     /**
      * @type {AbstractMesh}
@@ -16,13 +14,5 @@ export class BabylonMesh {
     /**
      * @type {string}
      */
-    name = undefined
-    /**
-     * @type {string}
-     */
     method = undefined
-    /**
-     * @type {Scene}
-     */
-    scene = undefined
 }

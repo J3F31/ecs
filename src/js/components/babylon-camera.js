@@ -1,11 +1,11 @@
 import { Camera } from "@babylonjs/core";
 import { Type } from "@lastolivegames/becsy";
-import { babylonCameraTypes } from "./babylon-camera-types";
+import { optionsBabylonCamera } from "./options-babylon-camera";
 
 export class BabylonCamera {
     static schema = {
         camera: Type.object,
-        type: Type.staticString(babylonCameraTypes)
+        type: Type.staticString(Object.keys(optionsBabylonCamera))
     }
     /**
     * @type {Camera}
