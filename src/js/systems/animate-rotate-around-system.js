@@ -38,15 +38,14 @@ export class SystemAnimateRotateAround extends System {
             // }
 
 
-            writePosition.x = readAnimation.radiusX * Math.cos(this.#alpha) * Math.sin(this.#beta);
-            writePosition.y = readAnimation.radiusY * Math.sin(this.#alpha) * Math.sin(this.#beta);
-            writePosition.z = readAnimation.radiusZ * Math.cos(this.#beta);
+            writePosition.x = readTarget.x + readAnimation.radiusX * Math.cos(this.#alpha) * Math.sin(this.#beta);
+            writePosition.y = readTarget.y + readAnimation.radiusY * Math.sin(this.#alpha) * Math.sin(this.#beta);
+            writePosition.z = readTarget.z + readAnimation.radiusZ * Math.cos(this.#beta);
             
             this.#alpha += readAnimation.alphaSpeed;
             this.#beta += readAnimation.betaSpeed;
             
             writeMesh.mesh.position = new Vector3(writePosition.x, writePosition.y, writePosition.z);
-            console.log(writeMesh.mesh.position)
         }
         function Lerp(a, b, t) {
             return (1 - t) * a + t * b;

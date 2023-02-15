@@ -40,7 +40,7 @@ worldRef.build(sys => {
     const entityBoxMesh = sys.createEntity(
         BabylonMesh, {method: Object.keys(optionsBabylonMesh)[0]},
         BabylonBoxMesh, {width: 5, height: 5, depth: 5},
-        ComponentPosition, {x: 0, y: 0, z: 0},
+        ComponentPosition, {x: 5, y: 0, z: 0},
         ComponentName, {name: 'Box'}
     )
 
