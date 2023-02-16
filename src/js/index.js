@@ -40,32 +40,32 @@ worldRef.build(sys => {
     const entityBoxMesh = sys.createEntity(
         BabylonMesh, {method: Object.keys(optionsBabylonMesh)[0]},
         BabylonBoxMesh, {width: 5, height: 5, depth: 5},
-        ComponentPosition, {x: 5, y: 0, z: 0},
+        ComponentPosition, {x: 0, y: 0, z: 0},
         ComponentName, {name: 'Box'}
     )
 
     const entityShpereMesh1 = sys.createEntity(
         BabylonMesh, {method: Object.keys(optionsBabylonMesh)[1]},
         BabylonSphereMesh, {diameter: 5},
-        ComponentPosition, {x: 1, y: 0, z: 0},
+        ComponentPosition, {x: 2, y: 2, z: 2},
         ComponentName, {name: 'Sphere1'},
-        AnimateRotateAround, {radiusX: 3, radiusY: 3, radiusZ: 3, alphaSpeed: .01, betaSpeed: .001, target: entityBoxMesh}
+        AnimateRotateAround, {usePosAsRadius: true, alphaSpeed: .05, betaSpeed: .05, target: entityBoxMesh}
     )
 
-    const entityShpereMesh2 = sys.createEntity(
-        BabylonMesh, {method: Object.keys(optionsBabylonMesh)[1]},
-        BabylonSphereMesh, {diameter: 5},
-        ComponentPosition, {x: 6, y: 6, z: 6},
-        ComponentName, {name: 'Sphere2'},
-        AnimateRotateAround, {radiusX: -3, radiusY: 1, radiusZ: 2, alphaSpeed: .001, betaSpeed: .01, target: entityBoxMesh}
-    )
+    //const entityShpereMesh2 = sys.createEntity(
+    //    BabylonMesh, {method: Object.keys(optionsBabylonMesh)[1]},
+    //    BabylonSphereMesh, {diameter: 5},
+    //    ComponentPosition, {x: 2, y: 0, z: 2},
+    //    ComponentName, {name: 'Sphere2'},
+    //    AnimateRotateAround, {usePosAsRadius: true, alphaSpeed: .05, betaSpeed: .05, target: entityBoxMesh}
+    //)
 
     const entityShpereMesh3 = sys.createEntity(
         BabylonMesh, {method: Object.keys(optionsBabylonMesh)[1]},
         BabylonSphereMesh, {diameter: 5},
-        ComponentPosition, {x: 6, y: 6, z: 6},
+        ComponentPosition, {x: -2, y: -2, z: 2},
         ComponentName, {name: 'Sphere3'},
-        AnimateRotateAround, {radiusX: 3, radiusY: -1, radiusZ: 1.2, alphaSpeed: .001, betaSpeed: .01, target: entityBoxMesh}
+        AnimateRotateAround, {usePosAsRadius: true, alphaSpeed: .05, betaSpeed: .05, target: entityBoxMesh}
     )
 })
 

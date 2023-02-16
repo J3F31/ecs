@@ -7,6 +7,8 @@ import { ComponentPosition } from "../components/component-position";
 import { optionsBabylonMesh } from "../components/options-babylon-mesh";
 import { ComponentName } from "../components/component-name";
 import { BabylonScene } from "../components/babylon-scene";
+import { StandardMaterial } from "@babylonjs/core/Materials/standardMaterial";
+import { Color3 } from "@babylonjs/core/Maths/math.color";
 
 export class SystemCreateMesh extends System {
     #entities = this.query(q => q.added.with(BabylonMesh, ComponentPosition, ComponentName).write.and.using(BabylonBoxMesh, BabylonSphereMesh).read) 
@@ -40,6 +42,9 @@ export class SystemCreateMesh extends System {
             }
             if (entityWrite.mesh == undefined) return
             entityWrite.mesh.position = new Vector3(positionRead.x, positionRead.y, positionRead.z);
+            const mat = new StandardMaterial('mat', sceneRead.scene)
+            mat.diffuseColor = new Color3(1, 0, 1)
+            entityWrite.mesh.material = mat
         }
     }
 }

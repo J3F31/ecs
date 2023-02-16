@@ -5,9 +5,8 @@ import { BabylonMesh } from "../components/babylon-mesh";
 import { ComponentPosition } from "../components/component-position";
 
 export class SystemAnimateRotateAround extends System {
-    #entities = this.query(q => q.current.with(AnimateRotateAround).read.and.with(ComponentPosition, BabylonMesh).write);
-    #alpha = 0;
-    #beta = 0;
+    #entities = this.query(q => q.current.with(AnimateRotateAround).write.and.with(ComponentPosition, BabylonMesh).write);
+
     constructor() {
         super();
         this.schedule(s => s.afterWritersOf(ComponentPosition));
@@ -15,36 +14,48 @@ export class SystemAnimateRotateAround extends System {
 
     execute() {
         for (let entity of this.#entities.current) {
-            const readAnimation = entity.read(AnimateRotateAround);
-            const readTarget = readAnimation.target.read(ComponentPosition);
+            const writeAnimation = entity.write(AnimateRotateAround);
+            const readTarget = writeAnimation.target.read(ComponentPosition);
             const writePosition = entity.write(ComponentPosition);
             const writeMesh = entity.write(BabylonMesh);
             
             // const dist = GetDistance3D(readTarget.x, readTarget.y, readTarget.z, writePosition.x, writePosition.y, writePosition.z)
 
-            // if (dist/readAnimation.separation > 1.1 || dist/readAnimation.separation < .9) {
-            //     if (dist > readAnimation.separation) {
-            //         writePosition.x = Lerp (writePosition.x, readTarget.x, readAnimation.approachStep);
-            //         writePosition.y = Lerp (writePosition.y, readTarget.y, readAnimation.approachStep);
-            //         writePosition.z = Lerp (writePosition.z, readTarget.z, readAnimation.approachStep);
+            // if (dist/writeAnimation.separation > 1.1 || dist/writeAnimation.separation < .9) {
+            //     if (dist > writeAnimation.separation) {
+            //         writePosition.x = Lerp (writePosition.x, readTarget.x, writeAnimation.approachStep);
+            //         writePosition.y = Lerp (writePosition.y, readTarget.y, writeAnimation.approachStep);
+            //         writePosition.z = Lerp (writePosition.z, readTarget.z, writeAnimation.approachStep);
             //     }
-            //     if (dist < readAnimation.separation) {
-            //         writePosition.x = Lerp (writePosition.x, readTarget.x, -readAnimation.approachStep);
-            //         writePosition.y = Lerp (writePosition.y, readTarget.y, -readAnimation.approachStep);
-            //         writePosition.z = Lerp (writePosition.z, readTarget.z, -readAnimation.approachStep);
+            //     if (dist < writeAnimation.separation) {
+            //         writePosition.x = Lerp (writePosition.x, readTarget.x, -writeAnimation.approachStep);
+            //         writePosition.y = Lerp (writePosition.y, readTarget.y, -writeAnimation.approachStep);
+            //         writePosition.z = Lerp (writePosition.z, readTarget.z, -writeAnimation.approachStep);
             //     }
             //     this.#alpha = Math.acos(DotProduct(writePosition.x, writePosition.y, writePosition.z, 0, 0, 1) / VectorMagnitude(writePosition.x, writePosition.y, writePosition.z));
             //     this.#beta = Math.acos(DotProduct(writePosition.x, writePosition.y, writePosition.z, 0, 1, 0) / VectorMagnitude(writePosition.x, writePosition.y, writePosition.z));
             // }
+            if (writeAnimation.usePosAsRadius) {
+              writeAnimation.radiusX = writePosition.x;
+              writeAnimation.radiusY = writePosition.y;
+              writeAnimation.radiusZ = writePosition.z;
+              writeAnimation.usePosAsRadius = false;
+            }
 
+            writePosition.x = readTarget.x + writeAnimation.radiusX * Math.cos(writeAnimation.currentAlpha) * Math.sin(writeAnimation.currentBeta);
+            writePosition.y = readTarget.y + writeAnimation.radiusY * Math.sin(writeAnimation.currentAlpha) * Math.sin(writeAnimation.currentBeta);
+            writePosition.z = readTarget.z + writeAnimation.radiusZ * Math.cos(writeAnimation.currentBeta);
 
-            writePosition.x = readTarget.x + readAnimation.radiusX * Math.cos(this.#alpha) * Math.sin(this.#beta);
-            writePosition.y = readTarget.y + readAnimation.radiusY * Math.sin(this.#alpha) * Math.sin(this.#beta);
-            writePosition.z = readTarget.z + readAnimation.radiusZ * Math.cos(this.#beta);
+            //if (writePosition.y > -.1 || writePosition.y < .1) writeAnimation.radiusY = -writeAnimation.radiusY;
             
-            this.#alpha += readAnimation.alphaSpeed;
-            this.#beta += readAnimation.betaSpeed;
+            if (writeAnimation.currentAlpha > 2 * Math.PI) writeAnimation.currentAlpha = -writeAnimation.currentAlpha;
+            writeAnimation.currentAlpha += writeAnimation.alphaSpeed;
+
+            if (writeAnimation.currentBeta > Math.PI) writeAnimation.currentBeta = -writeAnimation.currentBeta;
+            writeAnimation.currentBeta += writeAnimation.betaSpeed;
             
+            console.log(writePosition.y, writeAnimation.currentAlpha, writeAnimation.currentBeta)
+
             writeMesh.mesh.position = new Vector3(writePosition.x, writePosition.y, writePosition.z);
         }
         function Lerp(a, b, t) {

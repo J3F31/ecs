@@ -1,5 +1,5 @@
 import { System } from '@lastolivegames/becsy'
-import { Scene, Engine, Color3 } from '@babylonjs/core'
+import { Scene, Engine, Vector3, HemisphericLight } from '@babylonjs/core'
 import { BabylonScene } from '../components/babylon-scene';
 import "@babylonjs/core/Debug/debugLayer";
 import "@babylonjs/inspector";
@@ -22,6 +22,8 @@ export class SystemCreateScene extends System {
             const scene = new Scene(engine);
             entityWrite.scene = scene;
 
+            const light = new HemisphericLight('hemiLight', new Vector3(0, 1, 0), scene)
+
             engine.runRenderLoop(function () {
                 scene.render();
             });
@@ -30,7 +32,8 @@ export class SystemCreateScene extends System {
                 engine.resize();
             });
 
-            if (entityWrite.showInspector) scene.debugLayer.show({embedMode: true});
+            if (!entityWrite.showInspector) return
+            scene.debugLayer.show({embedMode: true});
         }
     }
 }
