@@ -9,16 +9,16 @@ import { ComponentName } from "../components/component-name";
 import { BabylonScene } from "../components/babylon-scene";
 
 export class SystemCreateMesh extends System {
-    #entities = this.query(q => q.added.with(BabylonMesh, ComponentPosition, ComponentName).write.and.using(BabylonBoxMesh, BabylonSphereMesh).read) 
-    #scene = this.query(q => q.added.with(BabylonScene).read)
+    #entities = this.query(q => q.added.with(BabylonMesh, ComponentPosition, ComponentName).write.and.using(BabylonBoxMesh, BabylonSphereMesh).read) ;
+    #scene = this.query(q => q.added.with(BabylonScene).read);
 
     constructor() {
-        super()
-        this.schedule(s => s.afterWritersOf(BabylonScene).inAnyOrderWithReadersOf(BabylonScene))
+        super();
+        this.schedule(s => s.afterWritersOf(BabylonScene).inAnyOrderWithReadersOf(BabylonScene));
     } 
     
     execute() {
-        let sceneRead = undefined
+        let sceneRead
         for (let entity of this.#scene.added) {
             sceneRead = entity.read(BabylonScene);
         }
@@ -43,7 +43,6 @@ export class SystemCreateMesh extends System {
             }
             if (entityWrite.mesh == undefined) return
             entityWrite.mesh.position = new Vector3(positionRead.x, positionRead.y, positionRead.z);
-
         }
     }
 }

@@ -13,6 +13,7 @@ import { ComponentName } from './components/component-name'
 import { optionsBabylonMesh } from './components/options-babylon-mesh'
 import { optionsBabylonCamera } from './components/options-babylon-camera'
 import { AnimateRotateAround } from './components/animate-rotate-around'
+import { ComponentMeshClickable } from './components/component-clickable'
 
 class TestBabylon extends System {
 
@@ -41,7 +42,8 @@ worldRef.build(sys => {
         BabylonMesh, {method: Object.keys(optionsBabylonMesh)[0]},
         BabylonBoxMesh, {width: .5, height: .5, depth: .5},
         ComponentPosition, {x: 0, y: 0, z: 0},
-        ComponentName, {name: 'Box'}
+        ComponentName, {name: 'Box'},
+        ComponentMeshClickable
     )
 
     const entityShpereMesh1 = sys.createEntity(
@@ -49,31 +51,31 @@ worldRef.build(sys => {
         BabylonSphereMesh, {diameter: 1},
         ComponentPosition, {x: 2, y: 2, z: 2},
         ComponentName, {name: 'Sphere1'},
-        AnimateRotateAround, {usePosAsRadius: true, angle: 1, speed: 2, target: entityBoxMesh}
+        AnimateRotateAround, {usePosAsRadius: true, angle: 0, speed: -1, target: entityBoxMesh}
     )
 
     const entityShpereMesh2 = sys.createEntity(
        BabylonMesh, {method: Object.keys(optionsBabylonMesh)[1]},
-       BabylonSphereMesh, {diameter: 2},
+       BabylonSphereMesh, {diameter: 1},
        ComponentPosition, {x: 2, y: 2, z: 2},
        ComponentName, {name: 'Sphere2'},
-       AnimateRotateAround, {usePosAsRadius: true, angle: 1, speed: 3, target: entityBoxMesh}
+       AnimateRotateAround, {usePosAsRadius: true, angle: Math.PI / 2, speed: -1, target: entityBoxMesh}
     )
 
     const entityShpereMesh3 = sys.createEntity(
         BabylonMesh, {method: Object.keys(optionsBabylonMesh)[1]},
-        BabylonSphereMesh, {diameter: 3},
+        BabylonSphereMesh, {diameter: 1},
         ComponentPosition, {x: 2, y: 2, z: 2},
         ComponentName, {name: 'Sphere3'},
-        AnimateRotateAround, {usePosAsRadius: true, angle: 1, speed: 2, target: entityBoxMesh}
+        AnimateRotateAround, {usePosAsRadius: true, angle: 0, speed: 1, target: entityBoxMesh}
     )
 
     const entityShpereMesh4 = sys.createEntity(
        BabylonMesh, {method: Object.keys(optionsBabylonMesh)[1]},
-       BabylonSphereMesh, {diameter: 4},
+       BabylonSphereMesh, {diameter: 1},
        ComponentPosition, {x: 2, y: 2, z: 2},
        ComponentName, {name: 'Sphere4'},
-       AnimateRotateAround, {usePosAsRadius: true, angle: 1, speed: 1, target: entityBoxMesh}
+       AnimateRotateAround, {usePosAsRadius: true, angle: Math.PI / 2, speed: 1, target: entityBoxMesh}
     )
 })
 
