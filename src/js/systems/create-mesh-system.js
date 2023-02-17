@@ -7,8 +7,6 @@ import { ComponentPosition } from "../components/component-position";
 import { optionsBabylonMesh } from "../components/options-babylon-mesh";
 import { ComponentName } from "../components/component-name";
 import { BabylonScene } from "../components/babylon-scene";
-import { StandardMaterial } from "@babylonjs/core/Materials/standardMaterial";
-import { Color3 } from "@babylonjs/core/Maths/math.color";
 
 export class SystemCreateMesh extends System {
     #entities = this.query(q => q.added.with(BabylonMesh, ComponentPosition, ComponentName).write.and.using(BabylonBoxMesh, BabylonSphereMesh).read) 
@@ -28,23 +26,24 @@ export class SystemCreateMesh extends System {
             const positionRead = entity.read(ComponentPosition);
             const nameRead = entity.read(ComponentName);
             const entityWrite = entity.write(BabylonMesh);
+            let sizeRead
             
             //Add mesh types here
             switch (entityWrite.method) {
                 case Object.keys(optionsBabylonMesh)[0]:
-                    entityWrite.mesh = MeshBuilder.CreateBox(nameRead.name, {}, sceneRead.scene);
+                    sizeRead = entity.read(BabylonBoxMesh);
+                    entityWrite.mesh = MeshBuilder.CreateBox(nameRead.name, {height: sizeRead.height, width: sizeRead.width, depth: sizeRead.depth}, sceneRead.scene);
                     break;
                 case Object.keys(optionsBabylonMesh)[1]:
-                    entityWrite.mesh = MeshBuilder.CreateSphere(nameRead.name, {}, sceneRead.scene);
+                    sizeRead = entity.read(BabylonSphereMesh);
+                    entityWrite.mesh = MeshBuilder.CreateSphere(nameRead.name, {diameter: sizeRead.diameter}, sceneRead.scene);
                     break;
                 default:
                     console.warn(`The mesh could not be created`);
             }
             if (entityWrite.mesh == undefined) return
             entityWrite.mesh.position = new Vector3(positionRead.x, positionRead.y, positionRead.z);
-            const mat = new StandardMaterial('mat', sceneRead.scene)
-            mat.diffuseColor = new Color3(1, 0, 1)
-            entityWrite.mesh.material = mat
+
         }
     }
 }

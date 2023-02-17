@@ -12,10 +12,12 @@ import { SystemAnimateRotateAround } from "./animate-rotate-around-system";
 import { SystemCreateCamera } from "./create-camera-system";
 import { SystemCreateMesh } from "./create-mesh-system";
 import { SystemCreateScene } from "./create-scene-system";
+import { SystemUpdateMesh } from "./update-mesh-system";
 
 export const WorldDefs = [
     SystemCreateScene, SystemCreateMesh, SystemCreateCamera,
     SystemAnimateRotateAround,
+    SystemUpdateMesh,
 
     BabylonScene, 
     BabylonMesh, BabylonBoxMesh, BabylonSphereMesh,

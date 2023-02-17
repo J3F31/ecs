@@ -6,12 +6,9 @@ export class AnimateRotateAround {
         radiusX: Type.float32,
         radiusY: Type.float32,
         radiusZ: Type.float32,
-        alphaAngleIncrease: Type.boolean,
-        betaAngleIncrease: Type.boolean,
-        currentAlpha: Type.float32,
         currentBeta: Type.float32,
-        alphaSpeed: Type.float32,
-        betaSpeed: Type.float32,
+        angle: Type.float32,
+        speed: Type.float32,
         target: Type.ref
     }
     /**
@@ -31,29 +28,17 @@ export class AnimateRotateAround {
     */
     radiusZ = 0
     /**
-    * @type {boolean}
-    */
-    alphaAngleIncrease = true
-    /**
-    * @type {boolean}
-    */
-    betaAngleIncrease = true
-    /**
-    * @type {float}
-    */
-    currentAlpha = 0
-    /**
     * @type {float}
     */
     currentBeta = 0
     /**
     * @type {float}
     */
-    alphaSpeed = 0
+    angle = 0
     /**
     * @type {float}
     */
-    betaSpeed = 0
+    speed = 0
     /**
     * @type {Entity}
     */

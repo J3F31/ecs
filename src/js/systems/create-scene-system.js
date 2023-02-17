@@ -33,7 +33,9 @@ export class SystemCreateScene extends System {
             });
 
             if (!entityWrite.showInspector) return
-            scene.debugLayer.show({embedMode: true});
+            scene.debugLayer.show({
+                embedMode: true
+            });
         }
     }
 }
