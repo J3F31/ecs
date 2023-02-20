@@ -1,6 +1,5 @@
 import { System } from "@lastolivegames/becsy";
 import { BabylonMesh } from "../components/babylon-mesh";
-import { ComponentMeshClickable } from "../components/component-clickable";
 import { ComponentPosition } from "../components/component-position";
 
 export class SystemUpdateMeshPosition extends System {
@@ -18,6 +17,5 @@ export class SystemUpdateMeshPosition extends System {
 
             meshRead.mesh.position.set(posRead.x, posRead.y, posRead.z);
         }
-        
     }
 }

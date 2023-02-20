@@ -1,25 +1,15 @@
 import { Type } from '@lastolivegames/becsy'
-import { Engine, Scene } from '@babylonjs/core'
+import { Scene } from '@babylonjs/core'
 
 export class BabylonScene {
     static schema = {
-        scene: Type.object,
-        engine: Type.object,
-        canvas: Type.object,
+        value: Type.weakObject,
         showInspector: Type.boolean
     }
     /**
      * @type {Scene}
      */
-    scene = undefined
-    /**
-     * @type {Engine}
-     */
-    engine = undefined
-    /**
-     * @type {HTMLCanvasElement}
-     */
-    canvas = undefined
+    value = undefined
     /**
      * @type {boolean}
      */

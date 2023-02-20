@@ -1,0 +1,25 @@
+{
+    "entities": {
+        "CameraEntity": {
+            "BabylonCamera": {"type": "FreeCamera"},
+            "BabylonFreeCamera": {},
+            "ComponentPosition": {"x": 0, "y": 0, "z": 10},
+            "ComponentName": {"name": "Camera"}
+        },
+        "BoxEntity": {
+            "BabylonMesh": {"method": "CreateBox"},
+            "BabylonBoxMesh": {"width": 1, "height": 1, "depth": 1},
+            "ComponentPosition": {"x": 0, "y": 0, "z": 0},
+            "ComponentName": {"name": "Box"},
+            "ComponentClickable": {}
+        },
+        "SphereEntity": {
+            "BabylonMesh": {"method": "CreateSphere"},
+            "BabylonSphereMesh": {"diameter": 1},
+            "ComponentPosition": {"x": 2, "y": 2, "z": 2},
+            "ComponentName": {"name": "Sphere"},
+            "AnimateRotateAround": {"usePosAsRadius": true, "angle": 0, "speed": -1, "target": "BoxEntity"},
+            "ComponentClickable": {}
+        }
+    }
+}

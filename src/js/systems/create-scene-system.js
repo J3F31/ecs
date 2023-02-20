@@ -5,37 +5,39 @@ import "@babylonjs/core/Debug/debugLayer";
 import "@babylonjs/inspector";
 
 export class SystemCreateScene extends System {
-    #entities = this.query(q => q.added.removed.with(BabylonScene).write)
+    scene = this.singleton.write(BabylonScene);
 
-    execute() {
-        for (let entity of this.#entities.added) {
-            const canvas = document.createElement('canvas');
-            canvas.style.width = 100 + 'dvw';
-            canvas.style.height = 100 + 'dvh';
-            document.body.append(canvas)
+    initialize() {
+        const canvas = document.createElement('canvas');
+        canvas.style.width = 100 + 'dvw';
+        canvas.style.height = 100 + 'dvh';
+        document.body.append(canvas)
 
-            const entityWrite = entity.write(BabylonScene);
-            entityWrite.canvas = canvas;
+        const engine = new Engine(canvas);
+        const scene = new Scene(engine);
 
-            const engine = new Engine(canvas);
-            entityWrite.engine = Engine;
-            const scene = new Scene(engine);
-            entityWrite.scene = scene;
+        // scene.skipPointerDownPicking = true;
+        // scene.skipPointerMovePicking = true;
+        // scene.skipPointerUpPicking = true;
+        scene.useRightHandedSystem = true;
 
-            const light = new HemisphericLight('hemiLight', new Vector3(0, 1, 0), scene)
+        this.scene.value = scene;
+        this.scene.showInspector = true;
 
-            engine.runRenderLoop(function () {
-                scene.render();
-            });
-            
-            window.addEventListener("resize", function () {
-                engine.resize();
-            });
+        const light = new HemisphericLight('hemiLight', new Vector3(0, 1, 0), scene)
 
-            if (!entityWrite.showInspector) return
-            scene.debugLayer.show({
-                embedMode: true
-            });
-        }
+        engine.runRenderLoop(function () {
+            scene.render();
+        });
+        
+        window.addEventListener("resize", function () {
+            engine.resize();
+        });
+
+        if (!this.scene.showInspector) return
+        scene.debugLayer.show({
+            embedMode: true
+        });
+        
     }
 }

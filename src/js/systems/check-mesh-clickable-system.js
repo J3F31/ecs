@@ -1,13 +1,13 @@
-import { ActionManager, ExecuteCodeAction, HighlightLayer } from "@babylonjs/core";
+import { ActionManager, Color3, ExecuteCodeAction, StandardMaterial } from "@babylonjs/core";
 import { System } from "@lastolivegames/becsy";
-import { BabylonInfoPanel } from "../components/babylon-infopanel";
+import { BabylonInfoPanelTarget } from "../components/babylon-infopanel-target";
 import { BabylonMesh } from "../components/babylon-mesh";
 import { BabylonScene } from "../components/babylon-scene";
 import { ComponentMeshClickable } from "../components/component-clickable";
 
 export class SystemCheckMeshClickable extends System {
     #entities = this.query(q => q.added.with(BabylonMesh, ComponentMeshClickable).read);
-    #scene = this.query(q => q.added.with(BabylonScene).read);
+    scene = this.singleton.read(BabylonScene);
 
     constructor() {
         super();
@@ -15,26 +15,22 @@ export class SystemCheckMeshClickable extends System {
     }
 
     execute() {
-        let sceneRead;
-        let highlightLayer
-        for (let entity of this.#scene.added) {
-            sceneRead = entity.read(BabylonScene);
-            highlightLayer = new HighlightLayer('hl', sceneRead.scene, {
-                isStroke: true
-            });
-        }
-        if (highlightLayer == undefined) return
         for (let entity of this.#entities.added) {
             const meshRead = entity.read(BabylonMesh);
 
             meshRead.mesh.isPickable = true;
-            meshRead.mesh.actionManager = new ActionManager(sceneRead.scene);
+            meshRead.mesh.actionManager = new ActionManager(this.scene.value);
 
             //ON MOUSE ENTER
             meshRead.mesh.actionManager.registerAction(new ExecuteCodeAction(ActionManager.OnPickTrigger, () => {
-                if (!entity.has(BabylonInfoPanel)) entity.add(BabylonInfoPanel);
-                else entity.remove(BabylonInfoPanel);
+                if (!entity.has(BabylonInfoPanelTarget)) entity.add(BabylonInfoPanelTarget);
+                else entity.remove(BabylonInfoPanelTarget);
             }));
+
+            //Temp mat change
+            const mat = new StandardMaterial('mat', this.scene.value);
+            mat.diffuseColor = new Color3(1, 0, 1);
+            meshRead.mesh.material = mat;
         }
     }
 }
