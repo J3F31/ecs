@@ -11,15 +11,15 @@
             "BabylonBoxMesh": {"width": 1, "height": 1, "depth": 1},
             "ComponentPosition": {"x": 0, "y": 0, "z": 0},
             "ComponentName": {"name": "Box"},
-            "ComponentClickable": {}
+            "ComponentMeshClickable": {}
         },
         "SphereEntity": {
             "BabylonMesh": {"method": "CreateSphere"},
             "BabylonSphereMesh": {"diameter": 1},
             "ComponentPosition": {"x": 2, "y": 2, "z": 2},
             "ComponentName": {"name": "Sphere"},
-            "AnimateRotateAround": {"usePosAsRadius": true, "angle": 0, "speed": -1, "target": "BoxEntity"},
-            "ComponentClickable": {}
+            "AnimateRotateAround": {"usePosAsRadius": true, "angle": 0, "speed": -1, "ref": "BoxEntity"},
+            "ComponentMeshClickable": {}
         }
     }
 }

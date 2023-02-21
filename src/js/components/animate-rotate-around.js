@@ -9,7 +9,7 @@ export class AnimateRotateAround {
         currentBeta: Type.float32,
         angle: Type.float32,
         speed: Type.float32,
-        target: Type.ref
+        ref: Type.ref
     }
     /**
     * @type {boolean}
@@ -42,5 +42,5 @@ export class AnimateRotateAround {
     /**
     * @type {Entity}
     */
-    target = undefined
+    ref = undefined
 }

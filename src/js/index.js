@@ -1,4 +1,4 @@
-import { System, World} from '@lastolivegames/becsy'
+import { component, System, World, Type} from '@lastolivegames/becsy'
 import { BabylonMesh } from './components/babylon-mesh'
 import { BabylonBoxMesh } from './components/babylon-mesh-box'
 import { BabylonSphereMesh } from './components/babylon-mesh-sphere'
@@ -23,67 +23,35 @@ class TestBabylon extends System {
     }
 }
 
-console.log(WorldDefs[9].name)
-
 const worldRef = await World.create({
     defs: [WorldDefs, TestBabylon]
 })
 
-worldRef.build(sys => {
-    for (const [key, value] of Object.entries(entityDefinitions.entities)) {
-        // sys.createEntity(value)
-        console.log(value)
+const findComponentInWorldDefs = (id) => {
+    let component = undefined;
+    for (const val in WorldDefs) {
+        if (WorldDefs[val].name == id) component = WorldDefs[val];
     }
-    const entityBabylonCamera = sys.createEntity(
-        BabylonCamera, {type: Object.keys(optionsBabylonCamera)[1]},
-        BabylonFreeCamera,
-        ComponentPosition, {x: 0, y: 0, z: 10},
-        ComponentName, {name: 'Camera'}
-    )
+    if (component == undefined) console.warn(`could not find component ${id}`);
+    return component;
+}
 
-    const entityBoxMesh1 = sys.createEntity(
-        BabylonMesh, {method: Object.keys(optionsBabylonMesh)[0]},
-        BabylonBoxMesh, {width: 1, height: 1, depth: 1},
-        ComponentPosition, {x: 0, y: 0, z: 0},
-        ComponentName, {name: 'Box1'},
-        ComponentMeshClickable
-    )
+worldRef.build(sys => {
+    const savedEntities = {}
+    for (const [name, components] of Object.entries(entityDefinitions.entities)) {
+        const entity = sys.createEntity();
+        for (let [componentName, componentProperties] of Object.entries(components)) {
+            savedEntities[name] = entity;
 
-    const entityShpereMesh1 = sys.createEntity(
-        BabylonMesh, {method: Object.keys(optionsBabylonMesh)[1]},
-        BabylonSphereMesh, {diameter: 1},
-        ComponentPosition, {x: 2, y: 2, z: 2},
-        ComponentName, {name: 'Sphere1'},
-        AnimateRotateAround, {usePosAsRadius: true, angle: 0, speed: -1, target: entityBoxMesh1},
-        ComponentMeshClickable
-    )
-
-    // const entityShpereMesh2 = sys.createEntity(
-    //    BabylonMesh, {method: Object.keys(optionsBabylonMesh)[1]},
-    //    BabylonSphereMesh, {diameter: 1},
-    //    ComponentPosition, {x: 2, y: 2, z: 2},
-    //    ComponentName, {name: 'Sphere2'},
-    //    AnimateRotateAround, {usePosAsRadius: true, angle: Math.PI / 2, speed: -1, target: entityBoxMesh1},
-    //    ComponentMeshClickable
-    // )
-
-    // const entityShpereMesh3 = sys.createEntity(
-    //     BabylonMesh, {method: Object.keys(optionsBabylonMesh)[1]},
-    //     BabylonSphereMesh, {diameter: 1},
-    //     ComponentPosition, {x: 2, y: 2, z: 2},
-    //     ComponentName, {name: 'Sphere3'},
-    //     AnimateRotateAround, {usePosAsRadius: true, angle: 0, speed: 1, target: entityBoxMesh1},
-    //     ComponentMeshClickable
-    // )
-
-    // const entityShpereMesh4 = sys.createEntity(
-    //    BabylonMesh, {method: Object.keys(optionsBabylonMesh)[1]},
-    //    BabylonSphereMesh, {diameter: 1},
-    //    ComponentPosition, {x: 2, y: 2, z: 2},
-    //    ComponentName, {name: 'Sphere4'},
-    //    AnimateRotateAround, {usePosAsRadius: true, angle: Math.PI / 2, speed: 1, target: entityBoxMesh1},
-    //    ComponentMeshClickable
-    // )
+            const component = findComponentInWorldDefs(componentName);
+            for (let fieldName in componentProperties) {
+                if(component.schema[fieldName] === Type.ref || component.schema[fieldName].type === Type.ref) {
+                    componentProperties[fieldName] = savedEntities[componentProperties[fieldName]]
+                }
+            }
+            entity.add(component, componentProperties);
+        }
+    }
 })
 
 const run = () => {

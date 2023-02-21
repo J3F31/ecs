@@ -13,7 +13,7 @@ export class SystemAnimateRotateAround extends System {
     execute() {
         for (let entity of this.#entities.current) {
             const readAnimation = entity.read(AnimateRotateAround);
-            const readTarget = readAnimation.target.read(ComponentPosition);
+            const readTarget = readAnimation.ref.read(ComponentPosition);
             const writePosition = entity.write(ComponentPosition);
 
             if (readAnimation.usePosAsRadius) {

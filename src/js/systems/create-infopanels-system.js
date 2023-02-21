@@ -4,7 +4,7 @@ import { BabylonInfoPanelMesh } from '../components/babylon-infopanel-mesh';
 import { BabylonScene } from '../components/babylon-scene';
 
 export class SystemCreateInfoPanels extends System {
-    infopanel = this.singleton.write(BabylonInfoPanelMesh);
+    #entities = this.query(q => q.added(BabylonInfoPanelMesh).write.and.changed.with(BabylonInfoPanelMesh).trackWrites.and.removed.with(BabylonInfoPanelMesh).write);
     scene = this.singleton.read(BabylonScene);
 
     constructor() {
@@ -12,7 +12,10 @@ export class SystemCreateInfoPanels extends System {
         this.schedule(s => s.afterWritersOf(BabylonScene));
     }
 
-    initialize() {
+    execute() {
+        for (let entity of this.#entities.added) {
+            const panelWrite = entity.write(BabylonInfoPanelMesh)
+        }
         this.infopanel.value = MeshBuilder.CreatePlane('GUITargetMesh', {size: 2}, this.scene.value);
         this.infopanel.value.setEnabled(false);
         this.infopanel.value.billboardMode = 7;

@@ -1,6 +1,6 @@
 import { ActionManager, Color3, ExecuteCodeAction, StandardMaterial } from "@babylonjs/core";
 import { System } from "@lastolivegames/becsy";
-import { BabylonInfoPanelTarget } from "../components/babylon-infopanel-target";
+import { BabylonInfoPanelMesh } from "../components/babylon-infopanel-mesh";
 import { BabylonMesh } from "../components/babylon-mesh";
 import { BabylonScene } from "../components/babylon-scene";
 import { ComponentMeshClickable } from "../components/component-clickable";
@@ -23,8 +23,8 @@ export class SystemCheckMeshClickable extends System {
 
             //ON MOUSE ENTER
             meshRead.mesh.actionManager.registerAction(new ExecuteCodeAction(ActionManager.OnPickTrigger, () => {
-                if (!entity.has(BabylonInfoPanelTarget)) entity.add(BabylonInfoPanelTarget);
-                else entity.remove(BabylonInfoPanelTarget);
+                if (!entity.has(BabylonInfoPanelMesh)) entity.add(BabylonInfoPanelMesh);
+                else entity.remove(BabylonInfoPanelMesh);
             }));
 
             //Temp mat change
