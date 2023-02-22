@@ -1,9 +1,9 @@
 import { ActionManager, Color3, ExecuteCodeAction, StandardMaterial } from "@babylonjs/core";
 import { System } from "@lastolivegames/becsy";
-import { BabylonInfoPanelMesh } from "../components/babylon-infopanel-mesh";
+import { BabylonInfoPanel } from "../components/babylon-infopanel";
 import { BabylonMesh } from "../components/babylon-mesh";
 import { BabylonScene } from "../components/babylon-scene";
-import { ComponentMeshClickable } from "../components/component-clickable";
+import { ComponentMeshClickable } from "../components/component-mesh-clickable";
 
 export class SystemCheckMeshClickable extends System {
     #entities = this.query(q => q.added.with(BabylonMesh, ComponentMeshClickable).read);
@@ -23,14 +23,9 @@ export class SystemCheckMeshClickable extends System {
 
             //ON MOUSE ENTER
             meshRead.mesh.actionManager.registerAction(new ExecuteCodeAction(ActionManager.OnPickTrigger, () => {
-                if (!entity.has(BabylonInfoPanelMesh)) entity.add(BabylonInfoPanelMesh);
-                else entity.remove(BabylonInfoPanelMesh);
+                if (!entity.has(BabylonInfoPanel)) entity.add(BabylonInfoPanel);
+                else entity.remove(BabylonInfoPanel);
             }));
-
-            //Temp mat change
-            const mat = new StandardMaterial('mat', this.scene.value);
-            mat.diffuseColor = new Color3(1, 0, 1);
-            meshRead.mesh.material = mat;
         }
     }
 }

@@ -1,16 +1,5 @@
-import { component, System, World, Type} from '@lastolivegames/becsy'
-import { BabylonMesh } from './components/babylon-mesh'
-import { BabylonBoxMesh } from './components/babylon-mesh-box'
-import { BabylonSphereMesh } from './components/babylon-mesh-sphere'
+import {  System, World, Type} from '@lastolivegames/becsy'
 import { WorldDefs } from './ecs-defs'
-import { BabylonCamera } from './components/babylon-camera'
-import { BabylonFreeCamera } from './components/babylon-camera-free'
-import { ComponentPosition } from './components/component-position'
-import { ComponentName } from './components/component-name'
-import { optionsBabylonMesh } from './components/options-babylon-mesh'
-import { optionsBabylonCamera } from './components/options-babylon-camera'
-import { AnimateRotateAround } from './components/animate-rotate-around'
-import { ComponentMeshClickable } from './components/component-clickable'
 import entityDefinitions from './config.json'
 
 class TestBabylon extends System {

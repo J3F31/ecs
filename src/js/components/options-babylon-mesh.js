@@ -1,4 +1,7 @@
 export const optionsBabylonMesh = {
     'CreateBox': 'CreateBox',
-    'CreateSphere': 'CreateSphere'
+    'CreateSphere': 'CreateSphere',
+    'CreateMoon': 'CreateMoon',
+    'CreateEarth': 'CreateEarth',
+    'CreateSun': 'CreateSun'
 }

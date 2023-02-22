@@ -3,7 +3,7 @@ import { BabylonMesh } from "../components/babylon-mesh";
 import { ComponentPosition } from "../components/component-position";
 
 export class SystemUpdateMeshPosition extends System {
-    #entities = this.query(q => q.current.with(BabylonMesh, ComponentPosition).read);
+    #entities = this.query(q => q.changed.with(BabylonMesh, ComponentPosition).trackWrites);
 
     constructor() {
         super();
@@ -11,7 +11,7 @@ export class SystemUpdateMeshPosition extends System {
     }
 
     execute() {
-        for (let entity of this.#entities.current) {
+        for (let entity of this.#entities.changed) {
             const posRead = entity.read(ComponentPosition);
             const meshRead = entity.read(BabylonMesh);
 

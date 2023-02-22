@@ -3,22 +3,30 @@
         "CameraEntity": {
             "BabylonCamera": {"type": "FreeCamera"},
             "BabylonFreeCamera": {},
-            "ComponentPosition": {"x": 0, "y": 0, "z": 10},
+            "ComponentPosition": {"x": 0, "y": 0, "z": 30},
             "ComponentName": {"name": "Camera"}
         },
-        "BoxEntity": {
-            "BabylonMesh": {"method": "CreateBox"},
-            "BabylonBoxMesh": {"width": 1, "height": 1, "depth": 1},
+        "SunEntity": {
+            "BabylonMesh": {"method": "CreateSun"},
+            "BabylonSphereMesh": {"diameter": 8},
             "ComponentPosition": {"x": 0, "y": 0, "z": 0},
-            "ComponentName": {"name": "Box"},
+            "ComponentName": {"name": "Sun"},
             "ComponentMeshClickable": {}
         },
-        "SphereEntity": {
-            "BabylonMesh": {"method": "CreateSphere"},
-            "BabylonSphereMesh": {"diameter": 1},
+        "EarthEntity": {
+            "BabylonMesh": {"method": "CreateEarth"},
+            "BabylonSphereMesh": {"diameter": 2},
+            "ComponentPosition": {"x": 0, "y": 0, "z": 0},
+            "ComponentName": {"name": "Earth"},
+            "AnimateRotateAround": {"radiusX": 10, "radiusY": 10, "radiusZ": 10, "angle": -0.2, "speed": -0.2, "ref": "SunEntity"},
+            "ComponentMeshClickable": {}
+        },
+        "MoonEntity": {
+            "BabylonMesh": {"method": "CreateMoon"},
+            "BabylonSphereMesh": {"diameter": 0.5},
             "ComponentPosition": {"x": 2, "y": 2, "z": 2},
-            "ComponentName": {"name": "Sphere"},
-            "AnimateRotateAround": {"usePosAsRadius": true, "angle": 0, "speed": -1, "ref": "BoxEntity"},
+            "ComponentName": {"name": "Moon"},
+            "AnimateRotateAround": {"usePosAsRadius": true, "angle": 0.8, "speed": -2, "ref": "EarthEntity"},
             "ComponentMeshClickable": {}
         }
     }
