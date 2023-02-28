@@ -7,14 +7,16 @@
             "ComponentName": {"name": "Camera"}
         },
         "SunEntity": {
-            "BabylonMesh": {"method": "CreateSun"},
+            "BabylonMesh": {"method": "CreateSphere"},
+            "BabylonStandardMaterial": {"name": "SunMat","import": "../../assets/textures/sun_diffuse.jpg", "emissiveColor": [0.9, 0.8, 0.7]},
             "BabylonSphereMesh": {"diameter": 8},
             "ComponentPosition": {"x": 0, "y": 0, "z": 0},
             "ComponentName": {"name": "Sun"},
             "ComponentMeshClickable": {}
         },
         "EarthEntity": {
-            "BabylonMesh": {"method": "CreateEarth"},
+            "BabylonMesh": {"method": "CreateSphere"},
+            "BabylonStandardMaterial": {"name": "EarthMat","import": "../../assets/textures/earth_diffuse.jpg"},
             "BabylonSphereMesh": {"diameter": 2},
             "ComponentPosition": {"x": 0, "y": 0, "z": 0},
             "ComponentName": {"name": "Earth"},
@@ -22,7 +24,8 @@
             "ComponentMeshClickable": {}
         },
         "MoonEntity": {
-            "BabylonMesh": {"method": "CreateMoon"},
+            "BabylonMesh": {"method": "CreateSphere"},
+            "BabylonStandardMaterial": {"name": "MoonMat","import": "../../assets/textures/moon_diffuse.jpg"},
             "BabylonSphereMesh": {"diameter": 0.5},
             "ComponentPosition": {"x": 2, "y": 2, "z": 2},
             "ComponentName": {"name": "Moon"},

@@ -19,15 +19,19 @@ import { SystemCreateScene } from "./systems/create-scene-system";
 import { SystemUpdateMeshPosition } from "./systems/update-mesh-position-system";
 import { SystemUpdateInfoPanel } from "./systems/update-infopanel-system";
 import { SystemRemoveInfoPanel } from "./systems/remove-infopanel-system";
+import { BabylonStandardMaterial } from "./components/babylon-standard-material";
+import { SystemCreateStandardMaterial } from "./systems/create-standard-material-system";
 
 export const WorldDefs = [
     SystemCreateScene, SystemCreateMesh, SystemCreateCamera, 
     SystemCreateInfoPanel, SystemUpdateInfoPanel, SystemRemoveInfoPanel,
     SystemAnimateRotateAround,
     SystemUpdateMeshPosition, SystemCheckMeshClickable,
+    SystemCreateStandardMaterial,
 
     BabylonScene, 
     BabylonMesh, BabylonBoxMesh, BabylonSphereMesh,
+    BabylonStandardMaterial,
     BabylonInfoPanel,
     BabylonCamera, BabylonFreeCamera, BabylonArcRotateCamera,
 
