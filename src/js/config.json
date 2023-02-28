@@ -3,7 +3,7 @@
         "CameraEntity": {
             "BabylonCamera": {"type": "FreeCamera"},
             "BabylonFreeCamera": {},
-            "ComponentPosition": {"x": 0, "y": 0, "z": 30},
+            "ComponentPosition": {"x": 0, "y": 0, "z": 0},
             "ComponentName": {"name": "Camera"}
         },
         "SunEntity": {

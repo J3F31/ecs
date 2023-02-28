@@ -1,8 +1,15 @@
 import { System } from '@lastolivegames/becsy'
-import { Scene, Engine, Vector3, HemisphericLight, Color3, DirectionalLight, PointLight, SpotLight } from '@babylonjs/core'
+import { Scene, Engine, Vector3, Color3, PointLight, CubeTexture, MeshBuilder, StandardMaterial, Texture } from '@babylonjs/core'
 import { BabylonScene } from '../components/babylon-scene';
 import "@babylonjs/core/Debug/debugLayer";
 import "@babylonjs/inspector";
+
+import '../../assets/renders/scene0/Scene0_f.jpeg'
+import '../../assets/renders/scene0/Scene0_u.jpeg'
+import '../../assets/renders/scene0/Scene0_l.jpeg'
+import '../../assets/renders/scene0/Scene0_b.jpeg'
+import '../../assets/renders/scene0/Scene0_d.jpeg'
+import '../../assets/renders/scene0/Scene0_r.jpeg'
 
 export class SystemCreateScene extends System {
     scene = this.singleton.write(BabylonScene);
@@ -32,6 +39,22 @@ export class SystemCreateScene extends System {
         ////light.groundColor = new Color3(0, 0, 0);
         light.specular = new Color3(0, 0, 0);
         light.intensity = 5;
+
+        const cubemap = CubeTexture.CreateFromImages([
+			 `../../assets/renders/scene0/Scene0_f.jpeg`,
+			 `../../assets/renders/scene0/Scene0_u.jpeg`,
+			 `../../assets/renders/scene0/Scene0_l.jpeg`,
+			 `../../assets/renders/scene0/Scene0_b.jpeg`,
+			 `../../assets/renders/scene0/Scene0_d.jpeg`,
+			 `../../assets/renders/scene0/Scene0_r.jpeg`,
+		], scene, true)
+        const skybox = MeshBuilder.CreateBox('skybox', {size: 100}, scene)
+        const skyboxMat = new StandardMaterial('skybox', scene)
+        skyboxMat.backFaceCulling = false
+        skyboxMat.disableLighting = true
+        skyboxMat.reflectionTexture = cubemap
+        skyboxMat.reflectionTexture.coordinatesMode = Texture.SKYBOX_MODE
+        skybox.material = skyboxMat
 
         engine.runRenderLoop(function () {
             scene.render();
