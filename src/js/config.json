@@ -1,10 +1,10 @@
 {
     "entities": {
+        "SceneEntity": {
+            "ComponentScene": {}
+        },
         "CameraEntity": {
-            "BabylonCamera": {"type": "FreeCamera"},
-            "BabylonFreeCamera": {},
-            "ComponentPosition": {"x": 0, "y": 0, "z": 0},
-            "ComponentName": {"name": "Camera"}
+            "ComponentCamera": {}
         },
         "SunEntity": {
             "BabylonMesh": {"method": "CreateSphere"},
@@ -31,6 +31,63 @@
             "ComponentName": {"name": "Moon"},
             "AnimateRotateAround": {"usePosAsRadius": true, "angle": 0.8, "speed": -2, "ref": "EarthEntity"},
             "ComponentMeshClickable": {}
+        }
+    },
+    "environments": {
+        "Scene0": {
+            "ComponentSkybox": {"assets": ""},
+            "ComponentBabylonMesh": {"method": "CreateBox"},
+            "ComponentPosition": {"x":-917.9, "y":165, "z":-694.7}
+        },
+        "Scene1": {
+            "ComponentSkybox": {"assets": ""},
+            "ComponentBabylonMesh": {"method": "CreateBox"},
+            "ComponentPosition": {"x":-106.8, "y":165, "z":-602.1}
+        },
+        "Scene2": {
+            "ComponentSkybox": {"assets": ""},
+            "ComponentBabylonMesh": {"method": "CreateBox"},
+            "ComponentPosition": {"x":-886.5, "y":165, "z":-520.4}
+        },
+        "Scene3": {
+            "ComponentSkybox": {"assets": ""},
+            "ComponentBabylonMesh": {"method": "CreateBox"},
+            "ComponentPosition": {"x":-880.9, "y":165, "z":-640.2}
+        },
+        "Scene4": {
+            "ComponentSkybox": {"assets": ""},
+            "ComponentBabylonMesh": {"method": "CreateBox"},
+            "ComponentPosition": {"x":-725.8, "y":165, "z":-659.2}
+        },
+        "Scene5": {
+            "ComponentSkybox": {"assets": ""},
+            "ComponentBabylonMesh": {"method": "CreateBox"},
+            "ComponentPosition": {"x":-520.9, "y":165, "z":-749.6}
+        },
+        "Scene6": {
+            "ComponentSkybox": {"assets": ""},
+            "ComponentBabylonMesh": {"method": "CreateBox"},
+            "ComponentPosition": {"x":-399.9, "y":165, "z":-894.2}
+        },
+        "Scene7": {
+            "ComponentSkybox": {"assets": ""},
+            "ComponentBabylonMesh": {"method": "CreateBox"},
+            "ComponentPosition": {"x":-392.3, "y":165, "z":-1171.9}
+        },
+        "Scene8": {
+            "ComponentSkybox": {"assets": ""},
+            "ComponentBabylonMesh": {"method": "CreateBox"},
+            "ComponentPosition": {"x":-659.1, "y":165, "z":-570.4}
+        },
+        "Scene9": {
+            "ComponentSkybox": {"assets": ""},
+            "ComponentBabylonMesh": {"method": "CreateBox"},
+            "ComponentPosition": {"x":-351.7, "y":165, "z":-1079.9}
+        },
+        "Scene10": {
+            "ComponentSkybox": {"assets": ""},
+            "ComponentBabylonMesh": {"method": "CreateBox"},
+            "ComponentPosition": {"x":-686.7, "y":165, "z":-716.5}
         }
     }
 }
