@@ -22,17 +22,45 @@
 // import { BabylonStandardMaterial } from "./components/babylon-standard-material";
 // import { SystemCreateStandardMaterial } from "./systems/create-standard-material-system";
 
-import { ComponentScene, ComponentSkybox, SystemCreateBabylonScene, SystemCreateSkybox, ComponentBabylonMesh, SystemCreateMesh, SystemCreateCamera, ComponentCamera, ComponentPosition } from "@j3f3/ms";
+import { ComponentBabylonObject, ComponentCamera, ComponentCameraFOV, ComponentCanvas, ComponentEulerRotation, ComponentMesh, ComponentPosition3D, ComponentQuaternionRotation, ComponentScale3D, ComponentScene, SystemAllowTransform, SystemApplyTransform, SystemCreateCamera, SystemCreateCanvas, SystemCreateScene, SystemUpdateCamera } from "@moyosa/spaces";
+
+
+
+
+// import { ComponentScene, ComponentSkybox, SystemCreateBabylonScene, SystemCreateSkybox, ComponentBabylonMesh, SystemCreateMesh, SystemCreateCamera, ComponentCamera, ComponentPosition } from "@j3f3/ms";
+
+
 
 export const WorldDefs = [
-    SystemCreateCamera, ComponentCamera,
-    ComponentScene, SystemCreateBabylonScene, 
+    //Camera Components
+    ComponentCameraFOV, ComponentCamera,
+
+    //Camera Systems
+    SystemCreateCamera, SystemUpdateCamera,
+
+    //Scene Components
+    ComponentScene, ComponentCanvas,
+
+    //Scene Systems
+    SystemCreateScene, SystemCreateCanvas,
+
+    //Transform Components
+    ComponentPosition3D, ComponentQuaternionRotation, ComponentEulerRotation, ComponentScale3D, ComponentBabylonObject,
+
+    //Transform Systems
+    SystemAllowTransform, SystemApplyTransform,
+
+    //Mesh Components
+    ComponentMesh,
+
+    // SystemCreateCamera, ComponentCamera,
+    // ComponentScene, SystemCreateBabylonScene, 
     // ComponentBabylonMesh, 
-    ComponentPosition,
-    ComponentSkybox, SystemCreateSkybox,
+    // ComponentPosition,
+    // ComponentSkybox, SystemCreateSkybox,
+    // SystemCreateMesh,
     // SystemCreateCamera,
     // SystemCreateScene, 
-    // SystemCreateMesh, 
     // SystemCreateInfoPanel, SystemUpdateInfoPanel, SystemRemoveInfoPanel,
     // SystemAnimateRotateAround,
     // SystemUpdateMeshPosition, SystemCheckMeshClickable,
