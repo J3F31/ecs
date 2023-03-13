@@ -22,7 +22,24 @@
 // import { BabylonStandardMaterial } from "./components/babylon-standard-material";
 // import { SystemCreateStandardMaterial } from "./systems/create-standard-material-system";
 
-import { ComponentBabylonObject, ComponentCamera, ComponentCameraFOV, ComponentCanvas, ComponentEulerRotation, ComponentMesh, ComponentPosition3D, ComponentQuaternionRotation, ComponentScale3D, ComponentScene, SystemAllowTransform, SystemApplyTransform, SystemCreateCamera, SystemCreateCanvas, SystemCreateScene, SystemUpdateCamera } from "@moyosa/spaces";
+import { 
+ComponentBabylonObject, 
+ComponentCamera, 
+ComponentCameraFOV, 
+ComponentCanvas, 
+ComponentEulerRotation, 
+ComponentMesh, 
+ComponentPosition3D, 
+ComponentQuaternionRotation, 
+ComponentScale3D, 
+ComponentScene, 
+SystemAllowTransform, 
+SystemApplyTransform, 
+SystemCreateCamera, 
+SystemCreateCanvas, 
+SystemCreateScene, 
+SystemUpdateCamera 
+} from "@moyosa/spaces";
 
 
 
