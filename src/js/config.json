@@ -11,8 +11,7 @@
             "BabylonStandardMaterial": {"name": "SunMat","import": "../../assets/textures/sun_diffuse.jpg", "emissiveColor": [0.9, 0.8, 0.7]},
             "BabylonSphereMesh": {"diameter": 8},
             "ComponentPosition": {"x": 0, "y": 0, "z": 0},
-            "ComponentName": {"name": "Sun"},
-            "ComponentMeshClickable": {}
+            "ComponentName": {"name": "Sun"}
         },
         "EarthEntity": {
             "BabylonMesh": {"method": "CreateSphere"},
@@ -20,8 +19,7 @@
             "BabylonSphereMesh": {"diameter": 2},
             "ComponentPosition": {"x": 0, "y": 0, "z": 0},
             "ComponentName": {"name": "Earth"},
-            "AnimateRotateAround": {"radiusX": 10, "radiusY": 10, "radiusZ": 10, "angle": -0.2, "speed": -0.2, "ref": "SunEntity"},
-            "ComponentMeshClickable": {}
+            "AnimateRotateAround": {"radiusX": 10, "radiusY": 10, "radiusZ": 10, "angle": -0.2, "speed": -0.2, "ref": "SunEntity"}
         },
         "MoonEntity": {
             "BabylonMesh": {"method": "CreateSphere"},
@@ -29,8 +27,7 @@
             "BabylonSphereMesh": {"diameter": 0.5},
             "ComponentPosition": {"x": 2, "y": 2, "z": 2},
             "ComponentName": {"name": "Moon"},
-            "AnimateRotateAround": {"usePosAsRadius": true, "angle": 0.8, "speed": -2, "ref": "EarthEntity"},
-            "ComponentMeshClickable": {}
+            "AnimateRotateAround": {"usePosAsRadius": true, "angle": 0.8, "speed": -2, "ref": "EarthEntity"}
         }
     }
 }
