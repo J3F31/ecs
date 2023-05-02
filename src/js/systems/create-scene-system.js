@@ -23,7 +23,7 @@ export class SystemCreateScene extends System {
         scene.clearColor.set(.1, .1, .1, 1);
 
         this.scene.value = scene;
-        this.scene.showInspector = true;
+        this.scene.showInspector = false;
 
         //const light = new HemisphericLight('hemiLight', new Vector3(1, 0, 0), scene);
         //const light = new DirectionalLight("dirLight", new Vector3(-1, 0, -.7), scene);
