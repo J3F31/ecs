@@ -7,7 +7,7 @@ import { ComponentMeshClickable } from "../components/component-mesh-clickable";
 
 export class SystemCheckMeshClickable extends System {
     #entities = this.query(q => q.added.with(BabylonMesh, ComponentMeshClickable).read);
-    scene = this.singleton.read(BabylonScene);
+    // scene = this.singleton.read(BabylonScene);
 
     constructor() {
         super();

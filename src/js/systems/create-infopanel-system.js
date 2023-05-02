@@ -8,7 +8,7 @@ import { ComponentMeshClickable } from '../components/component-mesh-clickable';
 
 export class SystemCreateInfoPanel extends System {
     #entities = this.query(q => q.added.with(BabylonInfoPanel, BabylonMesh, ComponentMeshClickable).write);
-    scene = this.singleton.read(BabylonScene);
+    // scene = this.singleton.read(BabylonScene);
 
     constructor() {
         super();

@@ -5,7 +5,7 @@ import { ComponentMeshClickable } from "../components/component-mesh-clickable";
 
 export class SystemRemoveInfoPanel extends System {
     #entities = this.query(q => q.removed.with(BabylonInfoPanel, ComponentMeshClickable).write);
-    scene = this.singleton.read(BabylonScene);
+    // scene = this.singleton.read(BabylonScene);
 
     constructor() {
         super();

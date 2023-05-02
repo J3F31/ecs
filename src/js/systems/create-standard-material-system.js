@@ -10,7 +10,7 @@ import '../../assets/textures/sun_diffuse.jpg'
 
 export class SystemCreateStandardMaterial extends System {
     #entities = this.query(q => q.added.with(BabylonMesh, BabylonStandardMaterial).read)
-    scene = this.singleton.read(BabylonScene)
+    // scene = this.singleton.read(BabylonScene)
 
     constructor() {
         super()

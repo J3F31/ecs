@@ -1,19 +1,29 @@
 import {  System, World, Type} from '@lastolivegames/becsy'
 import { WorldDefs } from './ecs-defs'
 import entityDefinitions from './config.json'
+import { HemisphericLight, Vector3 } from '@babylonjs/core'
 
-class TestBabylon extends System {
-    execute() {
-        document.body.style.overflow = 'hidden';
-        document.body.style.margin = 0;
-        const inspector = document.getElementById('embed-host');
-        if (inspector == undefined) return
-        inspector.style.position = 'absolute';
-    }
-}
+import '../assets/renders/Scene10/Scene10_f.jpeg'
+import '../assets/renders/Scene10/Scene10_u.jpeg'
+import '../assets/renders/Scene10/Scene10_l.jpeg'
+import '../assets/renders/Scene10/Scene10_b.jpeg'
+import '../assets/renders/Scene10/Scene10_d.jpeg'
+import '../assets/renders/Scene10/Scene10_r.jpeg'
+
+// class TestBabylon extends System {
+//     // scene = this.singleton.read(BabylonScene)
+
+//     execute() {
+//         document.body.style.overflow = 'hidden';
+//         document.body.style.margin = 0;
+//         const inspector = document.getElementById('embed-host');
+//         if (inspector == undefined) return
+//         inspector.style.position = 'absolute';
+//     }
+// }
 
 const worldRef = await World.create({
-    defs: [WorldDefs, TestBabylon]
+    defs: [WorldDefs]
 })
 
 const findComponentInWorldDefs = (id) => {
@@ -33,14 +43,53 @@ worldRef.build(sys => {
             savedEntities[name] = entity;
 
             const component = findComponentInWorldDefs(componentName);
+
             for (let fieldName in componentProperties) {
                 if(component.schema[fieldName] === Type.ref || component.schema[fieldName].type === Type.ref) {
                     componentProperties[fieldName] = savedEntities[componentProperties[fieldName]]
                 }
             }
-            entity.add(component, componentProperties);
+            if (component != undefined) entity.add(component, componentProperties);
         }
     }
+    // for (const [name, components] of Object.entries(entityDefinitions.environments)) {
+    //     const entity = sys.createEntity();
+    //     for (let [componentName, componentProperties] of Object.entries(components)) {
+    //         savedEntities[name] = entity;
+
+    //         const component = findComponentInWorldDefs(componentName);
+
+    //         for (let fieldName in componentProperties) {
+    //             if (fieldName == 'assets') {
+    //                 componentProperties[fieldName] = [
+    //                     /**webpack */`../assets/renders/${name}/${name}_f.jpeg`,
+    //                     `../assets/renders/${name}/${name}_u.jpeg`,
+    //                     `../assets/renders/${name}/${name}_l.jpeg`,
+    //                     `../assets/renders/${name}/${name}_b.jpeg`,
+    //                     `../assets/renders/${name}/${name}_d.jpeg`,
+    //                     `../assets/renders/${name}/${name}_r.jpeg`,
+    //                 ]
+    //             }
+    //         }
+    //         if (component != undefined) entity.add(component, componentProperties);
+    //     }
+    // }
+    // for (const [name, components] of Object.entries(entityDefinitions.test)) {
+    //     const entity = sys.createEntity();
+    //     for (let [componentName, componentProperties] of Object.entries(components)) {
+    //         savedEntities[name] = entity;
+
+    //         const component = findComponentInWorldDefs(componentName);
+
+    //         // for (let fieldName in componentProperties) {
+    //         //     if(component.schema[fieldName] === Type.ref || component.schema[fieldName].type === Type.ref) {
+    //         //         componentProperties[fieldName] = savedEntities[componentProperties[fieldName]]
+    //         //     }
+    //         // }
+    //         if (component != undefined) entity.add(component, componentProperties);
+    //     }
+    // }
+
 })
 
 const run = () => {

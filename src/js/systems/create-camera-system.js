@@ -4,17 +4,18 @@ import { FreeCamera, ArcRotateCamera, Vector3 } from '@babylonjs/core'
 import { BabylonScene } from "../components/babylon-scene";
 import { BabylonArcRotateCamera } from "../components/babylon-camera-arcrotate";
 import { BabylonFreeCamera } from "../components/babylon-camera-free";
-import { ComponentPosition } from "../components/component-position";
+// import { ComponentPosition } from "../components/component-position";
 import { optionsBabylonCamera } from "../components/options-babylon-camera";
 import { ComponentName } from "../components/component-name";
+import { ComponentScene, ComponentPosition } from "@j3f3/ms";
 
-export class SystemCreateCamera extends System {
+export class SystemCreateCameraTemp extends System {
     #entities = this.query(q => q.added.with(BabylonCamera, ComponentPosition, ComponentName).write.and.using(BabylonArcRotateCamera, BabylonFreeCamera).read);
-    scene = this.singleton.read(BabylonScene);
+    scene = this.singleton.read(ComponentScene);
 
     constructor() {
         super();
-        this.schedule(s => s.afterWritersOf(BabylonScene).inAnyOrderWithReadersOf(BabylonScene));
+        this.schedule(s => s.afterWritersOf(ComponentScene).inAnyOrderWithReadersOf(ComponentScene));
     }
 
     execute() {

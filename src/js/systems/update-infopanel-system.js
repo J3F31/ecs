@@ -6,7 +6,7 @@ import { ComponentPosition } from '../components/component-position';
 
 export class SystemUpdateInfoPanel extends System {
     #entities = this.query(q => q.changed.with(BabylonInfoPanel, ComponentPosition, ComponentMeshClickable).trackWrites);
-    scene = this.singleton.read(BabylonScene);
+    // scene = this.singleton.read(BabylonScene);
 
     constructor() {
         super();
