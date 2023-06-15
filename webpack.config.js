@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
 	entry: './src/js/index.js',
@@ -38,5 +39,13 @@ module.exports = {
 		port: 3000,
 		server: 'https',
 		open: false
-	}
+	},
+    optimization: {
+        minimize: true,
+        minimizer: [new TerserPlugin({
+            terserOptions: {
+                keep_classnames: true
+            }
+        })]
+    }
 }
