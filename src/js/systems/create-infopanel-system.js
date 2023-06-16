@@ -20,10 +20,11 @@ export class SystemCreateInfoPanel extends System {
             const panelWrite = entity.write(ComponentMeshClickable);
             const meshRead = entity.read(BabylonMesh);
 
-            console.log(meshRead.mesh.getBoundingInfo().maximum)
+            const bounds = meshRead.mesh.getBoundingInfo().maximum
+            const pos = meshRead.mesh.position
 
             panelWrite.mesh = MeshBuilder.CreatePlane('GUITargetMesh', {size: 2}, this.scene.value);
-            //panelWrite.mesh.position.set(posRead.x + 2, posRead.y + 2, posRead.z);
+            panelWrite.mesh.position.set(pos.x + bounds.x, pos.y + bounds.y, pos.z + bounds.z);
             panelWrite.texture = AdvancedDynamicTexture.CreateForMesh(panelWrite.mesh);
             panelWrite.texture.parseFromSnippetAsync('#FLGXJT#1');
         }

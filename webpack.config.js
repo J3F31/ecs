@@ -22,16 +22,24 @@ module.exports = {
 		rules: [
 			{
 				test: /\.css$/i,
-				use: [MiniCssExtractPlugin.loader, 'css-loader'],
+				use: [
+					MiniCssExtractPlugin.loader, 
+					'css-loader'
+				],
 			},
 			{
-				test: /\.(fx|glb|gltf|bin|jpg|png)$/i,
-				loader: 'file-loader',
-				options: {
-					context: 'src',
-					name: '[path][name].[ext]',
-				},
+				test: /\.(jpe?g|png|gif|svg|ico|mp4|m4a|woff2)$/i,
+				type: 'asset/resource'
 			},
+			{
+				test: /\.(glb|gltf|bin|manifest|obj|mtl)$/i,
+				type: 'asset/resource',
+				generator: {
+					filename: c => {
+						return c.filename.replace('src/', '')
+					}
+				}
+			}
 		],
 	},
 	devServer: {

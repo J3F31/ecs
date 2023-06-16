@@ -20,12 +20,15 @@ export class SystemCheckMeshClickable extends System {
 
             meshRead.mesh.isPickable = true;
             meshRead.mesh.actionManager = new ActionManager(this.scene.value);
-
             //ON MOUSE ENTER
-            meshRead.mesh.actionManager.registerAction(new ExecuteCodeAction(ActionManager.OnPickTrigger, () => {
-                if (!entity.has(BabylonInfoPanel)) entity.add(BabylonInfoPanel);
-                else entity.remove(BabylonInfoPanel);
-            }));
+            this.#actionManager(meshRead.mesh, entity.hold())
         }
+    }
+
+    #actionManager(mesh, entity) {
+        mesh.actionManager.registerAction(new ExecuteCodeAction(ActionManager.OnPickTrigger, () => {
+            if (!entity.has(BabylonInfoPanel)) entity.add(BabylonInfoPanel);
+            else entity.remove(BabylonInfoPanel);
+        }));
     }
 }
